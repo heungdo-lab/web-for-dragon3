@@ -27,6 +27,7 @@ export default class Note extends React.Component {
         params: { id }
       }
     } = this.props;
+    console.log(this.props);
     return (
       <Query query={GET_NOTE} variables={{ id }}>
         {({ data }) =>
