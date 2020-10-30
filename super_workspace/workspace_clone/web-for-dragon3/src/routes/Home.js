@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 
 import { ScreenContext } from "../context/ScreenContext";
 
@@ -7,14 +8,23 @@ import Product from "../components/Product";
 import { dragonProductList } from "../utils/ProductForDragon";
 import { ittallyProductList } from "../utils/ProductForIttally";
 
+import {
+  DRAGON,
+  ITTALLY,
+  WEB,
+  MOBILE,
+  DRAGON_KOREAN,
+  ITTALLY_KOREAN,
+} from "../constants/strings";
+
 const HomeContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   padding-top: ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? "80px"
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? "61px"
       : "71px"};
 `;
@@ -23,19 +33,19 @@ const HomeEachPart = styled.div`
   width: 50%;
   height: 100%;
   padding: ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? "20px"
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? "10px"
       : "10px"};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  border-width: ${(props) => (props.screenSize === "mobile" ? "2px" : "4px")};
+  border-width: ${(props) => (props.screenSize === MOBILE ? "2px" : "4px")};
   border-style: solid;
   border-image: ${(props) =>
-    props.content === "dragon"
+    props.content === DRAGON
       ? `linear-gradient(
     to right,
     rgba(183, 33, 255, 0.9),
@@ -84,7 +94,12 @@ const Home = () => {
 
   return (
     <HomeContainer screenSize={screenSize}>
-      <HomeEachPart screenSize={screenSize} content="dragon">
+      <Helmet>
+        <title>
+          {DRAGON_KOREAN} | {ITTALLY_KOREAN}
+        </title>
+      </Helmet>
+      <HomeEachPart screenSize={screenSize} content={DRAGON}>
         {dragonProductList.map((item) => (
           <Product
             key={item.id}
@@ -94,11 +109,11 @@ const Home = () => {
             size={item.size}
             price={item.price}
             images={item.images}
-            content={"dragon"}
+            content={DRAGON}
           />
         ))}
       </HomeEachPart>
-      <HomeEachPart screenSize={screenSize} content="ittally">
+      <HomeEachPart screenSize={screenSize} content={ITTALLY}>
         {ittallyProductList.map((item) => (
           <Product
             key={item.id}
@@ -108,7 +123,7 @@ const Home = () => {
             size={item.size}
             price={item.price}
             images={item.images}
-            content={"ittally"}
+            content={ITTALLY}
           />
         ))}
       </HomeEachPart>

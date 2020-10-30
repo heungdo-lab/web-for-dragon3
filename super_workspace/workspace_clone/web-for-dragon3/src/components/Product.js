@@ -1,20 +1,23 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
 import { ScreenContext } from "../context/ScreenContext";
+
+import { DRAGON, WEB, MOBILE } from "../constants/strings";
 
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? `
           width: 350px;
           margin-top: 30px;
           margin-bottom: 40px;
         `
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? `
           width: 250px;
           margin-top: 10px;
@@ -30,7 +33,7 @@ const ProductContainer = styled.div`
   /* HOVER */
   &:hover {
     background: ${(props) =>
-      props.content === "dragon"
+      props.content === DRAGON
         ? `linear-gradient(
       to left,
       rgba(183, 33, 255, 0.6),
@@ -42,7 +45,6 @@ const ProductContainer = styled.div`
       rgba(254, 81, 150, 0.6)
     )`};
     cursor: pointer;
-    color: #000000;
   }
 `;
 
@@ -50,7 +52,7 @@ const ProductImageBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: ${(props) => (props.screenSize === "web" ? "20px" : "5px")};
+  margin-bottom: ${(props) => (props.screenSize === WEB ? "20px" : "5px")};
 `;
 
 const ProductImage = styled.img`
@@ -65,12 +67,12 @@ const ProductInfoBox = styled.div`
 
 const Title = styled.div`
   ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? `
           font-size: 16px;
           font-weight: 700;
         `
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? `
           font-size: 12px;
           font-weight: 500;
@@ -81,7 +83,7 @@ const Title = styled.div`
         `}
   margin: 10px 0;
   background: ${(props) =>
-    props.content === "dragon"
+    props.content === DRAGON
       ? `linear-gradient(to right, #b721ff, #21d5fd)`
       : `linear-gradient(to right, #226c36, #fe5196)`};
   -webkit-background-clip: text;
@@ -90,11 +92,11 @@ const Title = styled.div`
 
 const Info = styled.div`
   ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? `
           font-size: 14px;
         `
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? `
           font-size: 10px;
         `
@@ -106,13 +108,13 @@ const Info = styled.div`
 
 const Price = styled.div`
   ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? `
           font-size: 14px;
           font-weight: 600;
           margin: 10px 0 30px 0;
         `
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? `
           font-size: 10px;
           font-weight: 500;
@@ -130,32 +132,34 @@ const Product = ({ id, title, number, size, price, images, content }) => {
 
   return (
     <ProductContainer screenSize={screenSize} content={content}>
-      <ProductImageBox screenSize={screenSize}>
-        <ProductImage screenSize={screenSize} src={images[0]} alt="image" />
-      </ProductImageBox>
-      <ProductInfoBox>
-        <Title screenSize={screenSize} content={content}>
-          {title}
-        </Title>
-        <Info small screenSize={screenSize}>
-          {number}
-        </Info>
-        <Info small screenSize={screenSize}>
-          {size}
-        </Info>
-        <CurrencyFormat
-          renderText={(value) => (
-            <Price bold screenSize={screenSize}>
-              {value}
-            </Price>
-          )}
-          decimalScale={2}
-          value={price}
-          displayType={"text"}
-          thousandSeparator={true}
-          suffix={"원"}
-        />
-      </ProductInfoBox>
+      <Link to={`/detail/${content}/${id}`}>
+        <ProductImageBox screenSize={screenSize}>
+          <ProductImage screenSize={screenSize} src={images[0]} alt="image" />
+        </ProductImageBox>
+        <ProductInfoBox>
+          <Title screenSize={screenSize} content={content}>
+            {title}
+          </Title>
+          <Info small screenSize={screenSize}>
+            {number}
+          </Info>
+          <Info small screenSize={screenSize}>
+            {size}
+          </Info>
+          <CurrencyFormat
+            renderText={(value) => (
+              <Price bold screenSize={screenSize}>
+                {value}
+              </Price>
+            )}
+            decimalScale={2}
+            value={price}
+            displayType={"text"}
+            thousandSeparator={true}
+            suffix={"원"}
+          />
+        </ProductInfoBox>
+      </Link>
     </ProductContainer>
   );
 };

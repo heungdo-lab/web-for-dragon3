@@ -10,6 +10,8 @@ import dragonTextLogo from "../images/dragon_text_logo.png";
 import ittallyImageLogo from "../images/ittally_image_logo.png";
 import ittallyTextLogo from "../images/ittally_text_logo.png";
 
+import { WEB, MOBILE } from "../constants/strings";
+
 const Header = styled.header`
   width: 100%;
   border: 0;
@@ -29,9 +31,9 @@ const Header = styled.header`
 const HeaderWrapper = styled.div`
   width: 100%;
   height: ${(props) =>
-    props.screenSize === "web"
+    props.screenSize === WEB
       ? "30px"
-      : props.screenSize === "mobile"
+      : props.screenSize === MOBILE
       ? "10px"
       : "20px"};
   max-width: ${(props) => props.theme.maxWidth};
@@ -63,7 +65,7 @@ export default () => {
       <HeaderWrapper screenSize={screenSize}>
         <HeaderColumn>
           <Link to="/dragon">
-            {screenSize === "web" ? (
+            {screenSize === WEB ? (
               <LogoImage src={dragonTextLogo} alt="dragon logo" />
             ) : (
               <LogoImage src={dragonImageLogo} alt="dragon logo" />
@@ -77,7 +79,7 @@ export default () => {
         </HeaderColumn>
         <HeaderColumn>
           <Link to="/ittally">
-            {screenSize === "web" ? (
+            {screenSize === WEB ? (
               <LogoImage src={ittallyTextLogo} alt="ittally logo" />
             ) : (
               <LogoImage src={ittallyImageLogo} alt="ittally logo" />
