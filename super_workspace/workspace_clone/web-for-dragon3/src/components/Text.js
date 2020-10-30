@@ -27,12 +27,14 @@ const Text = styled.div`
         return "font-size: 14px;";
     }
   }}
-  ${({ light, semi, bold, heavy }) => {
+  ${({ light, semi, dark, bold, heavy }) => {
     switch (true) {
       case light:
         return "font-weight: 200;";
       case semi:
         return "font-weight: 300;";
+      case dark:
+        return "font-weight: 500;";
       case bold:
         return "font-weight: 600;";
       case heavy:

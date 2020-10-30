@@ -4,52 +4,151 @@ import CurrencyFormat from "react-currency-format";
 
 import { ScreenContext } from "../context/ScreenContext";
 
-import Text from "./Text";
-
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-  margin-bottom: 40px;
-  padding: 10px;
-  width: ${(props) =>
+  ${(props) =>
     props.screenSize === "web"
-      ? "320px"
+      ? `
+          width: 350px;
+          margin-top: 30px;
+          margin-bottom: 40px;
+        `
       : props.screenSize === "mobile"
-      ? "120px"
-      : "220px"};
+      ? `
+          width: 250px;
+          margin-top: 10px;
+          margin-bottom: 15px;
+        `
+      : `
+          width: 350px;
+          margin-top: 10px;
+          margin-bottom: 15px;
+        `}
   background-color: white;
   z-index: 1;
+  /* HOVER */
+  &:hover {
+    background: ${(props) =>
+      props.content === "dragon"
+        ? `linear-gradient(
+      to left,
+      rgba(183, 33, 255, 0.6),
+      rgba(33, 213, 253, 0.6)
+    )`
+        : `linear-gradient(
+      to left,
+      rgba(34, 108, 54, 0.6),
+      rgba(254, 81, 150, 0.6)
+    )`};
+    cursor: pointer;
+    color: #000000;
+  }
 `;
 
 const ProductImageBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: ${(props) => (props.screenSize === "web" ? "20px" : "5px")};
 `;
 
 const ProductImage = styled.img`
-  width: 90%;
+  width: 100%;
 `;
 
-const ProductInfoBox = styled.div``;
+const ProductInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-const Product = ({ id, title, number, size, price, images }) => {
+const Title = styled.div`
+  ${(props) =>
+    props.screenSize === "web"
+      ? `
+          font-size: 16px;
+          font-weight: 700;
+        `
+      : props.screenSize === "mobile"
+      ? `
+          font-size: 12px;
+          font-weight: 500;
+        `
+      : `
+          font-size: 14px;
+          font-weight: 600;
+        `}
+  margin: 10px 0;
+  background: ${(props) =>
+    props.content === "dragon"
+      ? `linear-gradient(to right, #b721ff, #21d5fd)`
+      : `linear-gradient(to right, #226c36, #fe5196)`};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+const Info = styled.div`
+  ${(props) =>
+    props.screenSize === "web"
+      ? `
+          font-size: 14px;
+        `
+      : props.screenSize === "mobile"
+      ? `
+          font-size: 10px;
+        `
+      : `
+          font-size: 12px;
+        `}
+  margin: 2px;
+`;
+
+const Price = styled.div`
+  ${(props) =>
+    props.screenSize === "web"
+      ? `
+          font-size: 14px;
+          font-weight: 600;
+          margin: 10px 0 30px 0;
+        `
+      : props.screenSize === "mobile"
+      ? `
+          font-size: 10px;
+          font-weight: 500;
+          margin: 10px 0 15px 0;
+        `
+      : `
+          font-size: 12px;
+          font-weight: 600;
+          margin: 10px 0 15px 0;
+        `}
+`;
+
+const Product = ({ id, title, number, size, price, images, content }) => {
   const [{ screenSize }, _] = useContext(ScreenContext);
 
   return (
-    <ProductContainer screenSize={screenSize}>
-      <ProductImageBox>
+    <ProductContainer screenSize={screenSize} content={content}>
+      <ProductImageBox screenSize={screenSize}>
         <ProductImage screenSize={screenSize} src={images[0]} alt="image" />
       </ProductImageBox>
       <ProductInfoBox>
-        <Text title heavy center>
+        <Title screenSize={screenSize} content={content}>
           {title}
-        </Text>
-        <Text>{number}</Text>
-        <Text>{size}</Text>
+        </Title>
+        <Info small screenSize={screenSize}>
+          {number}
+        </Info>
+        <Info small screenSize={screenSize}>
+          {size}
+        </Info>
         <CurrencyFormat
-          renderText={(value) => <h3>{value}</h3>}
+          renderText={(value) => (
+            <Price bold screenSize={screenSize}>
+              {value}
+            </Price>
+          )}
           decimalScale={2}
           value={price}
           displayType={"text"}

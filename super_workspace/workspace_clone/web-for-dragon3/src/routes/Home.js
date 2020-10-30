@@ -11,25 +11,46 @@ const HomeContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: #222222;
+  padding-top: ${(props) =>
+    props.screenSize === "web"
+      ? "80px"
+      : props.screenSize === "mobile"
+      ? "61px"
+      : "71px"};
 `;
 
 const HomeEachPart = styled.div`
   width: 50%;
   height: 100%;
-  padding: 20px;
+  padding: ${(props) =>
+    props.screenSize === "web"
+      ? "20px"
+      : props.screenSize === "mobile"
+      ? "10px"
+      : "10px"};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background: ${(props) =>
+  border-width: ${(props) => (props.screenSize === "mobile" ? "2px" : "4px")};
+  border-style: solid;
+  border-image: ${(props) =>
     props.content === "dragon"
-      ? `linear-gradient(to right, rgba(183, 33, 255, 0.9), rgba(33, 212, 253, 0.9))`
-      : `linear-gradient(to right, rgba(34, 108, 54, 0.9), rgba(254, 81, 150, 0.9))`};
+      ? `linear-gradient(
+    to right,
+    rgba(183, 33, 255, 0.9),
+    rgba(33, 212, 253, 0.9)
+  )`
+      : `linear-gradient(
+    to right,
+    rgba(34, 108, 54, 0.9),
+    rgba(254, 81, 150, 0.9)
+  )`};
+  border-image-slice: 1;
 `;
 
 const Home = () => {
-  const [_, setScreenInfo] = useContext(ScreenContext);
+  const [{ screenSize }, setScreenInfo] = useContext(ScreenContext);
 
   const windowResize = () => {
     const windowWidth = window.innerWidth;
@@ -62,8 +83,8 @@ const Home = () => {
   }, []);
 
   return (
-    <HomeContainer>
-      <HomeEachPart content="dragon">
+    <HomeContainer screenSize={screenSize}>
+      <HomeEachPart screenSize={screenSize} content="dragon">
         {dragonProductList.map((item) => (
           <Product
             key={item.id}
@@ -73,10 +94,11 @@ const Home = () => {
             size={item.size}
             price={item.price}
             images={item.images}
+            content={"dragon"}
           />
         ))}
       </HomeEachPart>
-      <HomeEachPart content="ittally">
+      <HomeEachPart screenSize={screenSize} content="ittally">
         {ittallyProductList.map((item) => (
           <Product
             key={item.id}
@@ -86,6 +108,7 @@ const Home = () => {
             size={item.size}
             price={item.price}
             images={item.images}
+            content={"ittally"}
           />
         ))}
       </HomeEachPart>

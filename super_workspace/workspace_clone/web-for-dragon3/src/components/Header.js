@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 import { ScreenContext } from "../context/ScreenContext";
 
-import homeImageLogo from "../images/home_image_logo.png";
-import homeTextLogo from "../images/home_text_logo.png";
+import homeImageLogo from "../images/home_logo.png";
 import dragonImageLogo from "../images/dragon_image_logo.png";
 import dragonTextLogo from "../images/dragon_text_logo.png";
 import ittallyImageLogo from "../images/ittally_image_logo.png";
@@ -17,7 +16,7 @@ const Header = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: ${(props) => props.theme.headerColor};
+  background-color: ${(props) => props.theme.bgColor};
   border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
   display: flex;
@@ -29,7 +28,12 @@ const Header = styled.header`
 
 const HeaderWrapper = styled.div`
   width: 100%;
-  height: 30px;
+  height: ${(props) =>
+    props.screenSize === "web"
+      ? "30px"
+      : props.screenSize === "mobile"
+      ? "10px"
+      : "20px"};
   max-width: ${(props) => props.theme.maxWidth};
   display: flex;
   justify-content: space-between;
@@ -48,7 +52,7 @@ const HeaderColumn = styled.div`
 `;
 
 const LogoImage = styled.img`
-  height: 65px;
+  height: 35px;
 `;
 
 export default () => {
@@ -56,7 +60,7 @@ export default () => {
 
   return (
     <Header>
-      <HeaderWrapper>
+      <HeaderWrapper screenSize={screenSize}>
         <HeaderColumn>
           <Link to="/dragon">
             {screenSize === "web" ? (
@@ -68,11 +72,7 @@ export default () => {
         </HeaderColumn>
         <HeaderColumn>
           <Link to="/">
-            {screenSize === "web" ? (
-              <img src={homeTextLogo} alt="home logo" />
-            ) : (
-              <LogoImage src={homeImageLogo} alt="home logo" />
-            )}
+            <LogoImage src={homeImageLogo} alt="home logo" />
           </Link>
         </HeaderColumn>
         <HeaderColumn>

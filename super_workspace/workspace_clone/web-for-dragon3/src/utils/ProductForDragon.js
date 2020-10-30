@@ -1,6 +1,4 @@
-import testOne from "../images/products/test1.jpeg";
 import testTwo from "../images/products/test2.jpeg";
-import testThree from "../images/products/test3.jpeg";
 
 export const dragonProductList = [
   {
@@ -10,7 +8,7 @@ export const dragonProductList = [
     size: "Medium",
     price: 130000,
     images: [
-      testOne,
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
@@ -34,7 +32,7 @@ export const dragonProductList = [
     size: "Large",
     price: 180000,
     images: [
-      testThree,
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
@@ -46,7 +44,7 @@ export const dragonProductList = [
     size: "Medium",
     price: 109000,
     images: [
-      "https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg",
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
@@ -58,7 +56,7 @@ export const dragonProductList = [
     size: "Large",
     price: 79000,
     images: [
-      "https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg",
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
@@ -70,7 +68,7 @@ export const dragonProductList = [
     size: "Medium",
     price: 39000,
     images: [
-      "https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg",
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
@@ -82,7 +80,7 @@ export const dragonProductList = [
     size: "Small",
     price: 29000,
     images: [
-      "https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg",
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
@@ -94,7 +92,7 @@ export const dragonProductList = [
     size: "Medium",
     price: 109000,
     images: [
-      "https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg",
+      testTwo,
       "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
       "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
     ],
