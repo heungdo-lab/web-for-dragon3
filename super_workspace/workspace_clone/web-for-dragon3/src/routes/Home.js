@@ -1,17 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 
 import { ScreenContext } from "../context/ScreenContext";
 
-import Product from "../components/Product";
 import { dragonProductList } from "../utils/ProductForDragon";
 import { ittallyProductList } from "../utils/ProductForIttally";
+
+import Product from "../components/Product";
+import ProductDetailModalPopup from "../components/ProductDetailModalPopup";
 
 import {
   DRAGON,
   ITTALLY,
   WEB,
+  TABLET,
   MOBILE,
   DRAGON_KOREAN,
   ITTALLY_KOREAN,
@@ -61,6 +64,7 @@ const HomeEachPart = styled.div`
 
 const Home = () => {
   const [{ screenSize }, setScreenInfo] = useContext(ScreenContext);
+  const [modalDisplay, setModalDisplay] = useState("none");
 
   const windowResize = () => {
     const windowWidth = window.innerWidth;
@@ -69,19 +73,19 @@ const Home = () => {
       /* Mobile */
       setScreenInfo((curState) => ({
         ...curState,
-        screenSize: "mobile",
+        screenSize: MOBILE,
       }));
     } else if (windowWidth > 425 && windowWidth <= 768) {
       /* Tablet */
       setScreenInfo((curState) => ({
         ...curState,
-        screenSize: "tablet",
+        screenSize: TABLET,
       }));
     } else if (windowWidth > 768) {
       /* Web */
       setScreenInfo((curState) => ({
         ...curState,
-        screenSize: "web",
+        screenSize: WEB,
       }));
     }
   };
@@ -91,6 +95,34 @@ const Home = () => {
 
     window.addEventListener("resize", windowResize);
   }, []);
+
+  window.onclick = (event) => {
+    /* modal popup일 경우에만, window.onclick의 영향이 미치도록 하기 위해 */
+    if (modalDisplay === "block") {
+      const targetClassName = event.target.className;
+      /* 메시지 보내는 icon(plane)의 경우 className type이 object야.
+        그래서 typeof 검사를 안 해 주면, targetClassName.includes에서 오류가 나.
+        왜냐면 includes는 type이 string인 경우에만 동작하니까. */
+      if (
+        typeof targetClassName === "string" &&
+        targetClassName.includes("modal")
+      ) {
+        closeModal();
+      }
+    }
+  };
+
+  const closeModal = () => {
+    setModalDisplay("none");
+    /* modal popup 종료시, 다시 body 스크롤 보이도록 */
+    document.body.style.overflow = "auto";
+  };
+
+  const selectQuestion = () => {
+    setModalDisplay("block");
+    /* modal popup시, body 스크롤 없애기 */
+    document.body.style.overflow = "hidden";
+  };
 
   return (
     <HomeContainer screenSize={screenSize}>
@@ -110,6 +142,7 @@ const Home = () => {
             price={item.price}
             images={item.images}
             content={DRAGON}
+            selectQuestion={selectQuestion}
           />
         ))}
       </HomeEachPart>
@@ -124,9 +157,16 @@ const Home = () => {
             price={item.price}
             images={item.images}
             content={ITTALLY}
+            selectQuestion={selectQuestion}
           />
         ))}
       </HomeEachPart>
+
+      {/* The Modal */}
+      <ProductDetailModalPopup
+        modalDisplay={modalDisplay}
+        closeModal={closeModal}
+      />
     </HomeContainer>
   );
 };

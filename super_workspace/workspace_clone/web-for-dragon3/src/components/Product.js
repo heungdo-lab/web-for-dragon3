@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
 import { ScreenContext } from "../context/ScreenContext";
-
 import { DRAGON, WEB, MOBILE } from "../constants/strings";
 
 const ProductContainer = styled.div`
@@ -127,39 +125,64 @@ const Price = styled.div`
         `}
 `;
 
-const Product = ({ id, title, number, size, price, images, content }) => {
+const Product = ({
+  id,
+  title,
+  number,
+  size,
+  price,
+  images,
+  content,
+  selectQuestion,
+}) => {
   const [{ screenSize }, _] = useContext(ScreenContext);
+  const [currentItem, setCurrentItem] = useState(0);
+
+  const slide = () => {
+    const totalFiles = images.length;
+    if (currentItem === totalFiles - 1) {
+      setTimeout(() => setCurrentItem(0), 2000);
+    } else {
+      setTimeout(() => setCurrentItem(currentItem + 1), 2000);
+    }
+  };
+
+  useEffect(() => {
+    slide();
+  }, [currentItem]);
 
   return (
-    <ProductContainer screenSize={screenSize} content={content}>
-      <Link to={`/detail/${content}/${id}`}>
-        <ProductImageBox screenSize={screenSize}>
-          <ProductImage screenSize={screenSize} src={images[0]} alt="image" />
-        </ProductImageBox>
-        <ProductInfoBox>
-          <Title screenSize={screenSize} content={content}>
-            {title}
-          </Title>
-          <Info small screenSize={screenSize}>
-            {number}
-          </Info>
-          <Info small screenSize={screenSize}>
-            {size}
-          </Info>
-          <CurrencyFormat
-            renderText={(value) => (
-              <Price bold screenSize={screenSize}>
-                {value}
-              </Price>
-            )}
-            decimalScale={2}
-            value={price}
-            displayType={"text"}
-            thousandSeparator={true}
-            suffix={"원"}
-          />
-        </ProductInfoBox>
-      </Link>
+    <ProductContainer
+      screenSize={screenSize}
+      content={content}
+      onClick={selectQuestion}
+    >
+      <ProductImageBox screenSize={screenSize}>
+        <ProductImage key={id} screenSize={screenSize} src={images[0]} />
+      </ProductImageBox>
+      <ProductInfoBox screenSize={screenSize}>
+        <Title screenSize={screenSize} content={content}>
+          {title}
+        </Title>
+        <Info small screenSize={screenSize}>
+          {number}
+        </Info>
+        <Info small screenSize={screenSize}>
+          {size}
+        </Info>
+        <CurrencyFormat
+          renderText={(value) => (
+            <Price bold screenSize={screenSize}>
+              {value}
+            </Price>
+          )}
+          decimalScale={2}
+          value={price}
+          displayType={"text"}
+          thousandSeparator={true}
+          suffix={"원"}
+        />
+      </ProductInfoBox>
     </ProductContainer>
   );
 };

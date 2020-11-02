@@ -1,10 +1,12 @@
 import React, { useState, createContext } from "react";
 
+import { WEB } from "../constants/strings";
+
 const ScreenContext = createContext([{}, () => {}]);
 
 const ScreenProvider = (props) => {
   const [state, setState] = useState({
-    screenSize: "web",
+    screenSize: WEB,
   });
 
   return (

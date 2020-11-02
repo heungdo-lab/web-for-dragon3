@@ -1,4 +1,6 @@
-import testOne from "../images/products/test1.jpeg";
+import itemsZero from "../images/products/items0.jpeg";
+import itemsOne from "../images/products/items1.jpeg";
+import itemsTwo from "../images/products/items2.jpeg";
 
 export const ittallyProductList = [
   {
@@ -7,11 +9,7 @@ export const ittallyProductList = [
     number: "IT2020_001",
     size: "Large",
     price: 19000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsTwo, itemsOne, itemsZero],
   },
   {
     id: "second_ittally_product_002",
@@ -19,11 +17,7 @@ export const ittallyProductList = [
     number: "IT2020_001",
     size: "Small",
     price: 49000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsTwo, itemsZero, itemsOne],
   },
   {
     id: "first_ittally_product_003",
@@ -31,11 +25,7 @@ export const ittallyProductList = [
     number: "IT2020_003",
     size: "Large",
     price: 79000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsOne, itemsZero, itemsTwo],
   },
   {
     id: "second_ittally_product_004",
@@ -43,11 +33,7 @@ export const ittallyProductList = [
     number: "IT2020_004",
     size: "Small",
     price: 39000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsOne, itemsTwo, itemsZero],
   },
   {
     id: "first_ittally_product_005",
@@ -55,11 +41,7 @@ export const ittallyProductList = [
     number: "IT2020_005",
     size: "Large",
     price: 59000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsZero, itemsTwo, itemsOne],
   },
   {
     id: "second_ittally_product_006",
@@ -67,11 +49,7 @@ export const ittallyProductList = [
     number: "IT2020_006",
     size: "Small",
     price: 29000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsZero, itemsOne, itemsTwo],
   },
   {
     id: "second_ittally_product_007",
@@ -79,10 +57,14 @@ export const ittallyProductList = [
     number: "IT2020_007",
     size: "Small",
     price: 29000,
-    images: [
-      testOne,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsTwo, itemsOne, itemsZero],
+  },
+  {
+    id: "second_ittally_product_008",
+    title: "Sky blue bag",
+    number: "IT2020_008",
+    size: "Small",
+    price: 49000,
+    images: [itemsTwo, itemsZero, itemsOne],
   },
 ];

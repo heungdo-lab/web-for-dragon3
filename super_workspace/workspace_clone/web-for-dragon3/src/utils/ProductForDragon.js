@@ -1,4 +1,6 @@
-import testTwo from "../images/products/test2.jpeg";
+import itemsZero from "../images/products/items0.jpeg";
+import itemsOne from "../images/products/items1.jpeg";
+import itemsTwo from "../images/products/items2.jpeg";
 
 export const dragonProductList = [
   {
@@ -7,11 +9,7 @@ export const dragonProductList = [
     number: "DG2020_001",
     size: "Medium",
     price: 130000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsZero, itemsOne, itemsTwo],
   },
   {
     id: "second_dragon_product_002",
@@ -19,11 +17,7 @@ export const dragonProductList = [
     number: "DG2020_002",
     size: "Medium",
     price: 320000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsZero, itemsTwo, itemsOne],
   },
   {
     id: "first_dragon_product_003",
@@ -31,11 +25,7 @@ export const dragonProductList = [
     number: "DG2020_003",
     size: "Large",
     price: 180000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsOne, itemsZero, itemsTwo],
   },
   {
     id: "second_dragon_product_004",
@@ -43,11 +33,7 @@ export const dragonProductList = [
     number: "DG2020_004",
     size: "Medium",
     price: 109000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsOne, itemsTwo, itemsZero],
   },
   {
     id: "first_dragon_product_005",
@@ -55,11 +41,7 @@ export const dragonProductList = [
     number: "DG2020_005",
     size: "Large",
     price: 79000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsTwo, itemsZero, itemsOne],
   },
   {
     id: "second_dragon_product_006",
@@ -67,11 +49,7 @@ export const dragonProductList = [
     number: "DG2020_006",
     size: "Medium",
     price: 39000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsTwo, itemsOne, itemsZero],
   },
   {
     id: "first_dragon_product_007",
@@ -79,11 +57,7 @@ export const dragonProductList = [
     number: "DG2020_007",
     size: "Small",
     price: 29000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsZero, itemsOne, itemsTwo],
   },
   {
     id: "second_dragon_product_008",
@@ -91,10 +65,6 @@ export const dragonProductList = [
     number: "DG2020_008",
     size: "Medium",
     price: 109000,
-    images: [
-      testTwo,
-      "https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg",
-      "https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg",
-    ],
+    images: [itemsZero, itemsTwo, itemsOne],
   },
 ];
