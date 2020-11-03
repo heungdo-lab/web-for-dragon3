@@ -14,7 +14,7 @@ export const ittallyProductList = [
   {
     id: "second_ittally_product_002",
     title: "Sky blue bag",
-    number: "IT2020_001",
+    number: "IT2020_002",
     size: "Small",
     price: 49000,
     images: [itemsTwo, itemsZero, itemsOne],

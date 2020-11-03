@@ -18,6 +18,12 @@ import {
   MOBILE,
   DRAGON_KOREAN,
   ITTALLY_KOREAN,
+  BLOCK,
+  NONE,
+  STRING,
+  MODAL,
+  AUTO,
+  HIDDEN,
 } from "../constants/strings";
 
 const HomeContainer = styled.div`
@@ -64,7 +70,8 @@ const HomeEachPart = styled.div`
 
 const Home = () => {
   const [{ screenSize }, setScreenInfo] = useContext(ScreenContext);
-  const [modalDisplay, setModalDisplay] = useState("none");
+  const [modalDisplay, setModalDisplay] = useState(NONE);
+  const [productItem, setProductItem] = useState(null);
 
   const windowResize = () => {
     const windowWidth = window.innerWidth;
@@ -98,14 +105,14 @@ const Home = () => {
 
   window.onclick = (event) => {
     /* modal popup일 경우에만, window.onclick의 영향이 미치도록 하기 위해 */
-    if (modalDisplay === "block") {
+    if (modalDisplay === BLOCK) {
       const targetClassName = event.target.className;
       /* 메시지 보내는 icon(plane)의 경우 className type이 object야.
         그래서 typeof 검사를 안 해 주면, targetClassName.includes에서 오류가 나.
         왜냐면 includes는 type이 string인 경우에만 동작하니까. */
       if (
-        typeof targetClassName === "string" &&
-        targetClassName.includes("modal")
+        typeof targetClassName === STRING &&
+        targetClassName.includes(MODAL)
       ) {
         closeModal();
       }
@@ -113,15 +120,16 @@ const Home = () => {
   };
 
   const closeModal = () => {
-    setModalDisplay("none");
+    setModalDisplay(NONE);
     /* modal popup 종료시, 다시 body 스크롤 보이도록 */
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = AUTO;
   };
 
-  const selectQuestion = () => {
-    setModalDisplay("block");
+  const openProductDetail = (productItem) => {
+    setProductItem(productItem);
+    setModalDisplay(BLOCK);
     /* modal popup시, body 스크롤 없애기 */
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = HIDDEN;
   };
 
   return (
@@ -142,7 +150,7 @@ const Home = () => {
             price={item.price}
             images={item.images}
             content={DRAGON}
-            selectQuestion={selectQuestion}
+            openProductDetail={openProductDetail}
           />
         ))}
       </HomeEachPart>
@@ -157,7 +165,7 @@ const Home = () => {
             price={item.price}
             images={item.images}
             content={ITTALLY}
-            selectQuestion={selectQuestion}
+            openProductDetail={openProductDetail}
           />
         ))}
       </HomeEachPart>
@@ -166,6 +174,7 @@ const Home = () => {
       <ProductDetailModalPopup
         modalDisplay={modalDisplay}
         closeModal={closeModal}
+        productItem={productItem}
       />
     </HomeContainer>
   );

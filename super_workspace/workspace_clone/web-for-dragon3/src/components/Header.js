@@ -64,13 +64,11 @@ export default () => {
     <Header>
       <HeaderWrapper screenSize={screenSize}>
         <HeaderColumn>
-          <Link to="/dragon">
-            {screenSize === WEB ? (
-              <LogoImage src={dragonTextLogo} alt="dragon logo" />
-            ) : (
-              <LogoImage src={dragonImageLogo} alt="dragon logo" />
-            )}
-          </Link>
+          {screenSize === WEB ? (
+            <LogoImage src={dragonTextLogo} alt="dragon logo" />
+          ) : (
+            <LogoImage src={dragonImageLogo} alt="dragon logo" />
+          )}
         </HeaderColumn>
         <HeaderColumn>
           <Link to="/">
@@ -78,13 +76,11 @@ export default () => {
           </Link>
         </HeaderColumn>
         <HeaderColumn>
-          <Link to="/ittally">
-            {screenSize === WEB ? (
-              <LogoImage src={ittallyTextLogo} alt="ittally logo" />
-            ) : (
-              <LogoImage src={ittallyImageLogo} alt="ittally logo" />
-            )}
-          </Link>
+          {screenSize === WEB ? (
+            <LogoImage src={ittallyTextLogo} alt="ittally logo" />
+          ) : (
+            <LogoImage src={ittallyImageLogo} alt="ittally logo" />
+          )}
         </HeaderColumn>
       </HeaderWrapper>
     </Header>

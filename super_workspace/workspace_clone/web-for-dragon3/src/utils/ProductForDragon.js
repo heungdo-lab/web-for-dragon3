@@ -9,7 +9,7 @@ export const dragonProductList = [
     number: "DG2020_001",
     size: "Medium",
     price: 130000,
-    images: [itemsZero, itemsOne, itemsTwo],
+    images: [itemsZero, itemsOne, itemsTwo, itemsZero, itemsTwo, itemsOne],
   },
   {
     id: "second_dragon_product_002",

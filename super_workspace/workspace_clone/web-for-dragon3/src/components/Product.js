@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import CurrencyFormat from "react-currency-format";
 
@@ -133,29 +133,28 @@ const Product = ({
   price,
   images,
   content,
-  selectQuestion,
+  openProductDetail,
 }) => {
   const [{ screenSize }, _] = useContext(ScreenContext);
-  const [currentItem, setCurrentItem] = useState(0);
-
-  const slide = () => {
-    const totalFiles = images.length;
-    if (currentItem === totalFiles - 1) {
-      setTimeout(() => setCurrentItem(0), 2000);
-    } else {
-      setTimeout(() => setCurrentItem(currentItem + 1), 2000);
-    }
-  };
+  const [productItem, setProductItem] = useState(null);
 
   useEffect(() => {
-    slide();
-  }, [currentItem]);
+    setProductItem({
+      id,
+      title,
+      number,
+      size,
+      price,
+      images,
+      content,
+    });
+  }, []);
 
   return (
     <ProductContainer
       screenSize={screenSize}
       content={content}
-      onClick={selectQuestion}
+      onClick={openProductDetail.bind(this, productItem)}
     >
       <ProductImageBox screenSize={screenSize}>
         <ProductImage key={id} screenSize={screenSize} src={images[0]} />
