@@ -1,18 +1,24 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { Link, withRouter } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
 import { ScreenContext } from "../context/ScreenContext";
+
+import plane from "../images/plane.png";
 
 import {
   DRAGON,
   WEB,
   NONWEB,
   MOBILE,
+  STRING,
   MODAL,
   PREVIOUS,
   NEXT,
 } from "../constants/strings";
+
+// import LinkButton from "./LinkButton";
 
 /* Modal Popup - start */
 const Wrapper = styled.div`
@@ -124,7 +130,7 @@ const ModalProductPrice = styled.div`
 
 const ModalBody = styled.div`
   height: 80%;
-  background-color: lightsalmon;
+  /* background-color: lightsalmon; */
 `;
 
 const NonWebEachPart = styled.div`
@@ -166,8 +172,6 @@ const PreviousIcon = styled.span`
   font-size: 5vw;
   font-weight: bold;
   &:hover {
-    color: black;
-    text-decoration: none;
     cursor: pointer;
   }
 `;
@@ -187,137 +191,175 @@ const NextIcon = styled.span`
   font-size: 5vw;
   font-weight: bold;
   &:hover {
-    color: black;
-    text-decoration: none;
     cursor: pointer;
   }
 `;
 
-export default ({ modalDisplay, closeModal, productItem }) => {
-  const [{ screenSize }, _] = useContext(ScreenContext);
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+const LinkButton = styled.button`
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: ${(props) => (props.screenSize === WEB ? "4vw" : "4vh")};
+  height: ${(props) => (props.screenSize === WEB ? "4vw" : "4vh")};
+  border: 0;
+  border-radius: ${(props) => (props.screenSize === WEB ? "2vw" : "2vh")};
+  background-color: lightpink;
+  /* color... */
+  /* background: linear-gradient(to right, #b721ff, #21d5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  /* color... */
+  box-shadow: 2px 2px 10px 5px #262626;
+  &:hover {
+    cursor: pointer;
+    outline: none;
+  }
+`;
 
-  window.onclick = (event) => {
-    const targetClassName = event.target.className;
-    if (
-      typeof targetClassName === "string" &&
-      targetClassName.includes("modal")
-    ) {
-      exit();
-    }
-  };
+const PlaneImage = styled.img`
+  width: ${(props) => (props.screenSize === WEB ? "2vw" : "2vh")};
+  height: ${(props) => (props.screenSize === WEB ? "2vw" : "2vh")};
+`;
 
-  const exit = () => {
-    setCurrentItemIndex(0);
-    closeModal();
-  };
+export default withRouter(
+  ({ modalDisplay, closeModal, productItem, history }) => {
+    const [{ screenSize }, _] = useContext(ScreenContext);
+    const [currentItemIndex, setCurrentItemIndex] = useState(0);
 
-  const slide = (direction) => {
-    const imagesLength = productItem.images.length;
+    console.log("history: ", history);
 
-    if (direction === PREVIOUS) {
-      if (imagesLength - currentItemIndex === imagesLength) {
-        setCurrentItemIndex(imagesLength - 1);
-      } else {
-        setCurrentItemIndex(currentItemIndex - 1);
+    window.onclick = (event) => {
+      const targetClassName = event.target.className;
+      if (
+        typeof targetClassName === STRING &&
+        targetClassName.includes(MODAL)
+      ) {
+        exit();
       }
-    } else if (direction === NEXT) {
-      if (imagesLength - currentItemIndex === 1) {
-        setCurrentItemIndex(0);
-      } else {
-        setCurrentItemIndex(currentItemIndex + 1);
-      }
-    }
-  };
+    };
 
-  return productItem ? (
-    <Wrapper className={MODAL} modalDisplay={modalDisplay}>
-      {/* Modal content */}
-      <Container screenSize={screenSize}>
-        <CloseIcon onClick={exit}>
-          {/* &times; = 'x' in HTML - HTML Entities */}
-          &times;
-        </CloseIcon>
-        {screenSize === WEB ? (
-          <>
-            <WebEachPart>
-              <PreviousIcon
-                onClick={slide.bind(this, PREVIOUS)}
-                content={productItem.content}
-              >
-                {/* &#60; = '<' in HTML - HTML Entities */}
-                &#60;
-              </PreviousIcon>
-              <ModalProductImage src={productItem.images[currentItemIndex]} />
-              <NextIcon
-                onClick={slide.bind(this, NEXT)}
-                content={productItem.content}
-              >
-                {/* &#62; = '>' in HTML - HTML Entities */}
-                &#62;
-              </NextIcon>
-            </WebEachPart>
-            <WebEachPart content={productItem.content}>
-              <ModalHeader>
-                <ModalProductTitle content={productItem.content}>
-                  {productItem.title}
-                </ModalProductTitle>
-                <CurrencyFormat
-                  renderText={(value) => (
-                    <ModalProductPrice>{value}</ModalProductPrice>
-                  )}
-                  decimalScale={2}
-                  value={productItem.price}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  suffix={"원"}
-                />
-              </ModalHeader>
-              <ModalBody></ModalBody>
-            </WebEachPart>
-          </>
-        ) : (
-          <>
-            <NonWebEachPart>
-              <PreviousIcon
-                onClick={slide.bind(this, PREVIOUS)}
-                content={productItem.content}
-                size={NONWEB}
-              >
-                {/* &#60; = '<' in HTML - HTML Entities */}
-                &#60;
-              </PreviousIcon>
-              <ModalProductImage src={productItem.images[currentItemIndex]} />
-              <NextIcon
-                onClick={slide.bind(this, NEXT)}
-                content={productItem.content}
-                size={NONWEB}
-              >
-                {/* &#62; = '>' in HTML - HTML Entities */}
-                &#62;
-              </NextIcon>
-            </NonWebEachPart>
-            <NonWebEachPart>
-              <ModalHeader>
-                <ModalProductTitle content={productItem.content} size={NONWEB}>
-                  {productItem.title}
-                </ModalProductTitle>
-                <CurrencyFormat
-                  renderText={(value) => (
-                    <ModalProductPrice size={NONWEB}>{value}</ModalProductPrice>
-                  )}
-                  decimalScale={2}
-                  value={productItem.price}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  suffix={"원"}
-                />
-              </ModalHeader>
-              <ModalBody></ModalBody>
-            </NonWebEachPart>
-          </>
-        )}
-      </Container>
-    </Wrapper>
-  ) : null;
-};
+    const exit = () => {
+      setCurrentItemIndex(0);
+      closeModal();
+    };
+
+    const slide = (direction) => {
+      const imagesLength = productItem.images.length;
+
+      if (direction === PREVIOUS) {
+        if (imagesLength - currentItemIndex === imagesLength) {
+          setCurrentItemIndex(imagesLength - 1);
+        } else {
+          setCurrentItemIndex(currentItemIndex - 1);
+        }
+      } else if (direction === NEXT) {
+        if (imagesLength - currentItemIndex === 1) {
+          setCurrentItemIndex(0);
+        } else {
+          setCurrentItemIndex(currentItemIndex + 1);
+        }
+      }
+    };
+
+    return productItem ? (
+      <Wrapper className={MODAL} modalDisplay={modalDisplay}>
+        {/* Modal content */}
+        <Container screenSize={screenSize}>
+          <CloseIcon onClick={exit}>
+            {/* &times; = 'x' in HTML - HTML Entities */}
+            &times;
+          </CloseIcon>
+          {screenSize === WEB ? (
+            <>
+              <WebEachPart>
+                <PreviousIcon
+                  onClick={slide.bind(this, PREVIOUS)}
+                  content={productItem.content}
+                >
+                  {/* &#60; = '<' in HTML - HTML Entities */}
+                  &#60;
+                </PreviousIcon>
+                <ModalProductImage src={productItem.images[currentItemIndex]} />
+                <NextIcon
+                  onClick={slide.bind(this, NEXT)}
+                  content={productItem.content}
+                >
+                  {/* &#62; = '>' in HTML - HTML Entities */}
+                  &#62;
+                </NextIcon>
+              </WebEachPart>
+              <WebEachPart content={productItem.content}>
+                <ModalHeader>
+                  <ModalProductTitle content={productItem.content}>
+                    {productItem.title}
+                  </ModalProductTitle>
+                  <CurrencyFormat
+                    renderText={(value) => (
+                      <ModalProductPrice>{value}</ModalProductPrice>
+                    )}
+                    decimalScale={2}
+                    value={productItem.price}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"원"}
+                  />
+                </ModalHeader>
+                <ModalBody></ModalBody>
+              </WebEachPart>
+            </>
+          ) : (
+            <>
+              <NonWebEachPart>
+                <PreviousIcon
+                  onClick={slide.bind(this, PREVIOUS)}
+                  content={productItem.content}
+                  size={NONWEB}
+                >
+                  {/* &#60; = '<' in HTML - HTML Entities */}
+                  &#60;
+                </PreviousIcon>
+                <ModalProductImage src={productItem.images[currentItemIndex]} />
+                <NextIcon
+                  onClick={slide.bind(this, NEXT)}
+                  content={productItem.content}
+                  size={NONWEB}
+                >
+                  {/* &#62; = '>' in HTML - HTML Entities */}
+                  &#62;
+                </NextIcon>
+              </NonWebEachPart>
+              <NonWebEachPart>
+                <ModalHeader>
+                  <ModalProductTitle
+                    content={productItem.content}
+                    size={NONWEB}
+                  >
+                    {productItem.title}
+                  </ModalProductTitle>
+                  <CurrencyFormat
+                    renderText={(value) => (
+                      <ModalProductPrice size={NONWEB}>
+                        {value}
+                      </ModalProductPrice>
+                    )}
+                    decimalScale={2}
+                    value={productItem.price}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"원"}
+                  />
+                </ModalHeader>
+                <ModalBody></ModalBody>
+              </NonWebEachPart>
+            </>
+          )}
+          {/* <Link to="/product"> */}
+          <LinkButton screenSize={screenSize}>
+            <PlaneImage src={plane} alt="send" screenSize={screenSize} />
+          </LinkButton>
+          {/* </Link> */}
+        </Container>
+      </Wrapper>
+    ) : null;
+  }
+);
